@@ -15,6 +15,7 @@ books = sqlalchemy.Table(
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("title", sqlalchemy.String),
     sqlalchemy.Column("author", sqlalchemy.String),
+    sqlalchemy.Column("pages", sqlalchemy.Integer),
 )
 
 readers = sqlalchemy.Table(
@@ -29,10 +30,8 @@ readers_books = sqlalchemy.Table(
     "readers_books",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("book_id", sqlalchemy.ForeignKey("books.id"),
-                      nullable=False, index=True),
-    sqlalchemy.Column("reader_id", sqlalchemy.ForeignKey("readers.id"),
-                      nullable=False, index=True),
+    sqlalchemy.Column("book_id", sqlalchemy.ForeignKey("books.id"), nullable=False),
+    sqlalchemy.Column("reader_id", sqlalchemy.ForeignKey("readers.id"), nullable=False),
 )
 
 app = FastAPI()
